@@ -55,7 +55,7 @@ eg:‐ DLL hq[4]
  - blocknum 3 mod 4 in hq[3]
 
 
-## Step 2.To Implement GetBlk() algorithm 
+## Step 2. To Implement GetBlk() algorithm 
 In this file (named as getblk.h) we will implement following methods:
 
 -> **getBlock()**:‐ This function will handle all five cases of getbllk() algorithm 
@@ -70,7 +70,13 @@ In this file (named as getblk.h) we will implement following methods:
 -> **Handle_writeAsync()**:‐ If buffer marked with delayed write, remove that buffer from free list write its content to disk block and again add that buffer at front of free list.
 
 
-## Step 3. Driver code
+## Signal Handling
+File saved as (wait.h)
+We have to awake all the processes which are waiting for "any buffer" whenever any buffer becomes free. Similarily, we have to awake all the processes which are waiting for "specific buffer" whenever that specific buffer becomes free.
+
+So to do this I have implemented signal handling in wait.h file.
+
+## Step 4. Driver code
 File saved as (main.cpp). 
 We will create two threads in main function to implement multi programming/multi threading
 - Thread t1(fun,0) 
