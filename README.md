@@ -85,7 +85,12 @@ Main thread will be terminated after termination of thread t1 and thread t2 impl
 
 ### ***Why we choose multilple threads ?***
 Multi threading is the ability of a process to manage its use by more than one user at a time and to manage multiple requests by the same user without having to have multiple copies of the program.
-‐ Lightweight process 
-‐ Enhances efficiency in the context of communication.
-- Easy to handle.
-- Share resources like code section,data section.
+ 1. Easy to handle.
+
+ 2. Lightweight process.
+
+ 3. Enhances efficiency in the context of communication.
+
+ 4. Share resources like code section and data section.
+
+
