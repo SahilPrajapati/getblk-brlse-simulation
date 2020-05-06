@@ -4,12 +4,10 @@ Simulation of "getblk" and "brlse" algorithms in a multiprocessing environment.
 The simulation done using threads with the help of a buffer pool(buffer cache) structure. Used mutex locks and condition variables for efficient interleaving of processes.
 
 
-
-
 ## Step 1. To create Buffer Cache
 
 ### 1. How to implement Buffer Cache ?
-For Buffer Cache implemented a doubly linked list(file named as dll.h) having following functions which has to be implemented:
+For Buffer Cache, implemented a doubly linked list(file named as dll.h) having following functions which has to be implemented:
 
 
 -> **structure of node in doubly linked list**
@@ -19,21 +17,21 @@ For Buffer Cache implemented a doubly linked list(file named as dll.h) having fo
   - int statusf_b (0-free,1-busy)
   - int status2 (0-invalid,1-valid,2-delayed write)
   
-‐> **insert_at_start()**:‐needed when buffer marked as delayed write and kernel performs asynchronous write on disk block, after completion that buffer will be added at front of free list.
+‐> **insert_at_start()**:‐ Needed when buffer marked as delayed write and kernel performs asynchronous write on disk block, after completion that buffer will be added at front of free list.
 
-‐> **insert_at_end()**:‐ When buffer get unlocked or free then it added at tail of free list.
+‐> **insert_at_end()**:‐ When buffer get unlocked or free then it will be added at the tail of free list.
 
 ‐> **delete_from_begin()**:‐When kernel want any free buffer then it will be removed from head of free list.
 
-‐> **delete_by_value()**:‐ When kernel want any specific buffer it may be present in middle of the list so we will search buffer by blocknumber. 
+‐> **delete_by_value()**:‐ When kernel want any specific buffer it may be present in middle of the list so we will search buffer by blocknumber, deletes it and then return it. 
 
-‐> **isPresent()**:‐it searches for block whether it is present in buffer cache or not ‐>isEmpty():‐ Used to check whether free list is empty or not.
+‐> **isPresent()**:‐ It searches for block whether it is present in buffer cache or not.
 
-‐> **getBuffer()**:‐ when kernel found the buffer it returns address of that buffer or node in terms of doubly linked list. 
+‐> **getBuffer()**:‐ When kernel found the buffer, it returns the address of that buffer (or node in terms of doubly linked list). 
 
-‐> **change_status()**:‐To change status for specific buffer (from free to busy or busy to free).
+‐> **change_status()**:‐ To change status for specific buffer (from free to busy or busy to free).
 
--> **change_status2()**:- changes status of given block number to newstatus.
+-> **change_status2()**:- Changes status of given block number to newstatus.
 
 -> **display()**:- To display the contents of the doubly linked list.
 
@@ -49,8 +47,8 @@ We choose doubly linked list for following reasons:
 
 
 ### 3. How we can maintain hash queue for efficient searching for block in buffer cache ?
-For efficient searching we will create array of 4 doubly linked list 
-eg:‐DLL hq[4] 
+For efficient searching we will create an array of 4 doubly linked list 
+eg:‐ DLL hq[4] 
  - blocknum 0 mod 4 in hq[0]
  - blocknum 1 mod 4 in hq[1] 
  - blocknum 2 mod 4 in hq[2] 
@@ -67,9 +65,9 @@ In this file (named as getblk.h) we will implement following methods:
   - Case 4. The kernel cannot find the block on the hash queue and the free list of buffers is empty.
   - Case 5. The kernel finds the block on the hash queue,but its buffer is currently busy.
 
--> **Handle_write()**:‐ use to mark buffer with delayed write i.e.change buffer status
+-> **Handle_write()**:‐ Used to mark buffer with delayed write i.e.change buffer status
 
--> **Handle_writeAsync()**:‐ if buffer marked with delayed write , remove that buffer from free list write its content to disk block and again add that buffer at front of free list.
+-> **Handle_writeAsync()**:‐ If buffer marked with delayed write, remove that buffer from free list write its content to disk block and again add that buffer at front of free list.
 
 
 ## Step 3. Driver code
