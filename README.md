@@ -70,3 +70,22 @@ In this file (named as getblk.h) we will implement following methods:
 -> **Handle_write()**:‐ use to mark buffer with delayed write i.e.change buffer status
 
 -> **Handle_writeAsync()**:‐ if buffer marked with delayed write , remove that buffer from free list write its content to disk block and again add that buffer at front of free list.
+
+
+## Step 3. Driver code
+File saved as (main.cpp). 
+We will create two threads in main function to implement multi programming/multi threading
+- Thread t1(fun,0) 
+- Thread t2(fun,0)
+
+Main thread will be terminated after termination of thread t1 and thread t2 implemented as 
+- t1.join() 
+- t2.join();
+
+
+### ***Why we choose multilple threads ?***
+Multi threading is the ability of a process to manage its use by more than one user at a time and to manage multiple requests by the same user without having to have multiple copies of the program.
+‐ Lightweight process 
+‐ Enhances efficiency in the context of communication.
+- Easy to handle.
+- Share resources like code section,data section.
